@@ -7,7 +7,10 @@ let gameStarted = false;
 const startButton = document.getElementById('start-btn');
 const scoreDisplay = document.getElementById('score');
 const timeLeftDisplay = document.getElementById('time-left');
+const modal = document.getElementById('game-modal');
+const finalScore = document.getElementById('final-score');
 
+// Start or reset the game
 function startGame() {
     score = 0;
     timeLeft = 30;
@@ -19,6 +22,7 @@ function startGame() {
     heartInterval = setInterval(createHeart, 1000);
 }
 
+// Update the timer every second
 function updateTime() {
     timeLeft--;
     timeLeftDisplay.textContent = timeLeft;
@@ -28,26 +32,42 @@ function updateTime() {
         gameStarted = false;
         startButton.disabled = false;
         startButton.textContent = 'Play Again';
-        alert('No matter how much you scored, You are always a winner cutie! Your score is: ' + score);
+        
+        // Show custom pop-up instead of alert
+        finalScore.textContent = score;
+        modal.style.display = "flex";
     }
 }
 
+// Create floating heart
 function createHeart() {
     if (!gameStarted) return;
+
     const heart = document.createElement('div');
     heart.textContent = '❤️';
     heart.classList.add('heart');
     heart.style.left = `${Math.random() * window.innerWidth}px`;
     heart.style.top = `${Math.random() * window.innerHeight}px`;
+
     document.body.appendChild(heart);
+
+    // Add click event to heart
     heart.addEventListener('click', () => {
         score++;
         scoreDisplay.textContent = score;
-        heart.remove();
+        heart.remove(); // Remove heart after click
     });
+
+    // Remove heart after a while
     setTimeout(() => heart.remove(), 2000);
 }
 
+// Close modal
+function closeModal() {
+    modal.style.display = "none";
+}
+
+// Start or restart the game when button is clicked
 startButton.addEventListener('click', () => {
     if (!gameStarted) {
         startGame();

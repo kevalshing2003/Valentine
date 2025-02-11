@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Day Heart Collector</title>
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <h2>Game Over!</h2>
+            <p>Your Score: <span id="final-score">0</span></p>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+    
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -81,7 +89,7 @@
 
     <div class="score">Score: <span id="score">0</span></div>
     <div class="timer">Time: <span id="time-left">30</span> seconds</div>
-
+    <script src="heart.js"></script>
     <script>
         let score = 0;
         let timeLeft = 30;
