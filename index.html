@@ -14,32 +14,36 @@
             background-color: #ffdde1;
             font-family: 'Arial', sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 10px;
         }
         .container {
             background: white;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
         }
         h1 {
             color: #ff4d6d;
+            font-size: 2rem;
         }
         h3 {
             color: #333;
-        }
-        p {
-            margin: 10px 0;
+            font-size: 1.2rem;
         }
         button {
             background-color: #ff4d6d;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: 0.3s;
-            margin: 10px;
+            margin-top: 15px;
+            width: 100%;
         }
         button:hover {
             background-color: #e63950;
@@ -51,13 +55,20 @@
             animation: float 3s linear infinite;
         }
         @keyframes float {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
             }
-            100% {
-                transform: translateY(-100px) scale(1.5);
-                opacity: 0;
+            h3 {
+                font-size: 1rem;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
             }
         }
     </style>
@@ -72,7 +83,6 @@
     
     <script>
         function triggerSurprise() {
-            // Create floating hearts
             const container = document.getElementById('heart-container');
             for (let i = 0; i < 30; i++) {
                 let heart = document.createElement('div');
@@ -85,10 +95,9 @@
                 setTimeout(() => heart.remove(), 3000);
             }
 
-            // Redirect to the game page after a delay
             setTimeout(() => {
                 window.location.href = 'game.html';
-            }, 4000); // 4-second delay before redirection
+            }, 4000);
         }
     </script>
 </body>
