@@ -138,3 +138,30 @@ if (timeLeft <= 0) {
     clearInterval(timerInterval);
     endGame(playerScore);
 }
+function showGameOverPopup(finalScore) {
+    const modal = document.getElementById('game-over-modal');
+    document.getElementById('final-score').innerText = finalScore; // Update final score in the pop-up
+    modal.style.display = 'flex';
+}
+
+// Function to close the pop-up
+function closeModal() {
+    const modal = document.getElementById('game-over-modal');
+    modal.style.display = 'none';
+}
+
+// **Modify the existing game-ending function**
+function endGame() {
+    clearInterval(gameInterval);  // Stop the game timer
+    clearInterval(heartInterval); // Stop hearts from appearing
+    showGameOverPopup(score); // Show the pop-up with the player's final score
+}
+
+// **Ensure the timer calls `endGame()` when time runs out**
+function updateTime() {
+    timeLeft--;
+    document.getElementById('time-left').textContent = timeLeft;
+    if (timeLeft <= 0) {
+        endGame();
+    }
+}
