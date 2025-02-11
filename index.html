@@ -3,9 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine</title>
+    <title>Happy Valentine's Day ❤</title>
+    <link rel="stylesheet" href="siddhivalentine.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffdde1;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4d6d;
+        }
+        h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #e63950;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: red;
+            animation: float 3s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, Keval! Your website is working! ❤️</h1>
+    <div class="container">
+        <h1>Happy Valentine's Day, <br> Siddhi! 💖</h1>
+        <p><h3> त्वया विना स्वर्गं अपिनारोचि </h3></p>
+        <button onclick="triggerSurprise()">Click for a Surprise</button>
+        <div id="heart-container"></div>
+    </div>
+    
+    <script>
+        function triggerSurprise() {
+            // Create floating hearts
+            const container = document.getElementById('heart-container');
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = Math.random() * window.innerHeight + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+
+            // Redirect to the game page after a delay
+            setTimeout(() => {
+                window.location.href = 'game.html';
+            }, 4000); // 4-second delay before redirection
+        }
+    </script>
 </body>
 </html>
