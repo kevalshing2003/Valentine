@@ -3,103 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day ❤</title>
-    <link rel="stylesheet" href="siddhivalentine.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #ffdde1;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 10px;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            width: 400px;
-        }
-        h1 {
-            color: #ff4d6d;
-            font-size: 2rem;
-        }
-        h3 {
-            color: #333;
-            font-size: 1.2rem;
-        }
-        button {
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
-            margin-top: 15px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #e63950;
-        }
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            color: red;
-            animation: float 3s linear infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
-        }
-        /* Responsive Styling */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            h3 {
-                font-size: 1rem;
-            }
-            button {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
-    </style>
+    <title>Valentine's Day Heart Collector</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Happy Valentine's Day, <br> Siddhi! 💖</h1>
-        <p><h3> त्वया विना स्वर्गं अपिनारोचि </h3></p>
-        <button onclick="triggerSurprise()">Click for a Surprise</button>
-        <div id="heart-container"></div>
-    </div>
-    
-    <script>
-        function triggerSurprise() {
-            const container = document.getElementById('heart-container');
-            for (let i = 0; i < 30; i++) {
-                let heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤';
-                heart.style.left = Math.random() * window.innerWidth + 'px';
-                heart.style.top = Math.random() * window.innerHeight + 'px';
-                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 3000);
-            }
 
-            setTimeout(() => {
-                window.location.href = 'game.html';
-            }, 4000);
-        }
-    </script>
-    <script src="krisi.js"></script>
+    <h1>Valentine's Day Heart Collector</h1>
+    <p>Click on as many hearts as you can before time runs out!</p>
+
+    <button id="start-btn">Start Game</button>
+
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="timer">Time: <span id="time-left">30</span> seconds</div>
+
+    <!-- Game Over Pop-up -->
+    <div id="game-over-modal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 Game Over, My Love! 🎉</h2>
+            <p>No matter your score, you're the best! 💖</p>
+            <p>Your Final Score: <span id="final-score"></span></p>
+            <p>You are my **forever player one** in this game of love! 💕</p>
+            <button onclick="closeModal()">💖 Close & Try Again 💖</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
 </body>
 </html>
