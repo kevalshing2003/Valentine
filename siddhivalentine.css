@@ -1,0 +1,40 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFB6C1;
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+h1 {
+    font-size: 2.5em;
+    color: #FF1493;
+}
+.heart {
+    position: absolute;
+    font-size: 3em;
+    cursor: pointer;
+    animation: float 2s ease-in-out infinite;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
+}
+.score, .timer {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #FF69B4;
+}
+#start-btn {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #FF69B4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#start-btn:hover {
+    background-color: #FF1493;
+}
