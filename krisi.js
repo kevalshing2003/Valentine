@@ -79,3 +79,21 @@ startButton.addEventListener('click', () => {
         startGame();
     }
 });
+function showSurprise() {
+    // This function should be called when the game ends
+    const modal = document.getElementById('game-over-modal');
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('game-over-modal');
+    modal.style.display = 'none';
+}
+
+// Call showSurprise() only when the game is over
+function endGame(score) {
+    alert(`No matter how much you scored, you are always a winner, cutie! Your score is: ${score}`);
+    
+    // Instead of an alert, show the modal
+    showSurprise();
+}
