@@ -97,3 +97,23 @@ function endGame(score) {
     // Instead of an alert, show the modal
     showSurprise();
 }
+function showSurprise(finalScore) {
+    const modal = document.getElementById('game-over-modal');
+    document.getElementById('final-score').innerText = finalScore; // Update score dynamically
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('game-over-modal');
+    modal.style.display = 'none';
+}
+
+// Call this function when the game ends
+function endGame(score) {
+    showSurprise(score);
+}
+
+if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    endGame(playerScore);
+}
