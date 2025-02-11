@@ -18,6 +18,7 @@ function startGame() {
     scoreDisplay.textContent = score;
     timeLeftDisplay.textContent = timeLeft;
     startButton.disabled = true;
+    startButton.textContent = "Game in Progress...";
     gameInterval = setInterval(updateTime, 1000);
     heartInterval = setInterval(createHeart, 1000);
 }
@@ -27,16 +28,21 @@ function updateTime() {
     timeLeft--;
     timeLeftDisplay.textContent = timeLeft;
     if (timeLeft <= 0) {
-        clearInterval(gameInterval);
-        clearInterval(heartInterval);
-        gameStarted = false;
-        startButton.disabled = false;
-        startButton.textContent = 'Play Again';
-        
-        // Show custom pop-up instead of alert
-        finalScore.textContent = score;
-        modal.style.display = "flex";
+        endGame();
     }
+}
+
+// End the game and show the pop-up
+function endGame() {
+    clearInterval(gameInterval);
+    clearInterval(heartInterval);
+    gameStarted = false;
+    startButton.disabled = false;
+    startButton.textContent = 'Play Again';
+
+    // Show custom pop-up with final score
+    finalScore.textContent = score;
+    modal.style.display = "flex";
 }
 
 // Create floating heart
@@ -62,15 +68,14 @@ function createHeart() {
     setTimeout(() => heart.remove(), 2000);
 }
 
-// Close modal
+// Close the pop-up
 function closeModal() {
     modal.style.display = "none";
 }
 
-// Start or restart the game when button is clicked
+// Start or restart the game when the button is clicked
 startButton.addEventListener('click', () => {
     if (!gameStarted) {
         startGame();
-        startButton.textContent = 'Game in Progress...';
     }
 });
