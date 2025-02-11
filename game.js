@@ -7,8 +7,10 @@ let gameStarted = false;
 const startButton = document.getElementById('start-btn');
 const scoreDisplay = document.getElementById('score');
 const timeLeftDisplay = document.getElementById('time-left');
+const finalScoreDisplay = document.getElementById('final-score');
+const modal = document.getElementById('game-over-modal');
 
-// **Start Game**
+// Start Game
 function startGame() {
     score = 0;
     timeLeft = 30;
@@ -20,7 +22,7 @@ function startGame() {
     heartInterval = setInterval(createHeart, 1000);
 }
 
-// **Update Timer**
+// Update Timer
 function updateTime() {
     timeLeft--;
     timeLeftDisplay.textContent = timeLeft;
@@ -29,19 +31,7 @@ function updateTime() {
     }
 }
 
-// **End Game Function**
-function endGame() {
-    clearInterval(gameInterval);
-    clearInterval(heartInterval);
-    gameStarted = false;
-    startButton.disabled = false;
-    startButton.textContent = 'Play Again';
-
-    // Show pop-up after game over
-    showGameOverPopup(score);
-}
-
-// **Create Hearts**
+// Create Hearts
 function createHeart() {
     if (!gameStarted) return;
 
@@ -53,7 +43,6 @@ function createHeart() {
 
     document.body.appendChild(heart);
 
-    // Heart Click Event
     heart.addEventListener('click', () => {
         score++;
         scoreDisplay.textContent = score;
@@ -63,19 +52,23 @@ function createHeart() {
     setTimeout(() => heart.remove(), 2000);
 }
 
-// **Show Game Over Pop-up**
-function showGameOverPopup(finalScore) {
-    const modal = document.getElementById('game-over-modal');
-    document.getElementById('final-score').innerText = finalScore;
+// End Game & Show Pop-up
+function endGame() {
+    clearInterval(gameInterval);
+    clearInterval(heartInterval);
+    gameStarted = false;
+    startButton.disabled = false;
+    startButton.textContent = 'Play Again';
+    finalScoreDisplay.textContent = score;
     modal.style.display = 'flex';
 }
 
-// **Close Pop-up**
+// Close Pop-up
 function closeModal() {
-    document.getElementById('game-over-modal').style.display = 'none';
+    modal.style.display = 'none';
 }
 
-// **Start Game on Button Click**
+// Start Game on Button Click
 startButton.addEventListener('click', () => {
     if (!gameStarted) {
         startGame();
