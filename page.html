@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Heart Collector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFB6C1;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #FF1493;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 3em;
+            cursor: pointer;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+
+        .score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #FF69B4;
+        }
+
+        .timer {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #FF1493;
+        }
+
+        #start-btn {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #start-btn:hover {
+            background-color: #FF1493;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Valentine's Day Heart Collector</h1>
+    <p>Click on as many hearts as you can before time runs out!</p>
+
+    <button id="start-btn">Start Game</button>
+
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="timer">Time: <span id="time-left">30</span> seconds</div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let heartInterval;
+        let gameStarted = false;
+
+        const startButton = document.getElementById('start-btn');
+        const scoreDisplay = document.getElementById('score');
+        const timeLeftDisplay = document.getElementById('time-left');
+
+        // Start or reset the game
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            gameStarted = true;
+            scoreDisplay.textContent = score;
+            timeLeftDisplay.textContent = timeLeft;
+            startButton.disabled = true;
+            gameInterval = setInterval(updateTime, 1000);
+            heartInterval = setInterval(createHeart, 1000);
+        }
+
+        // Update the timer every second
+        function updateTime() {
+            timeLeft--;
+            timeLeftDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(gameInterval);
+                clearInterval(heartInterval);
+                gameStarted = false;
+                startButton.disabled = false;
+                startButton.textContent = 'Play Again';
+                alert('No matter how much you scored, You are always a winner cutie! Your score is: ' + score);
+            }
+        }
+
+        // Create floating heart
+        function createHeart() {
+            if (!gameStarted) return;
+
+            const heart = document.createElement('div');
+            heart.textContent = '❤️';
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * window.innerWidth}px`;
+            heart.style.top = `${Math.random() * window.innerHeight}px`;
+
+            document.body.appendChild(heart);
+
+            // Add click event to heart
+            heart.addEventListener('click', () => {
+                score++;
+                scoreDisplay.textContent = score;
+                heart.remove(); // Remove heart after click
+            });
+
+            // Remove heart after it floats for a while
+            setTimeout(() => heart.remove(), 2000);
+        }
+
+        // Start or restart the game when button is clicked
+        startButton.addEventListener('click', () => {
+            if (!gameStarted) {
+                startGame();
+                startButton.textContent = 'Game in Progress...';
+            }
+        });
+    </script>
+
+</body>
+</html>
